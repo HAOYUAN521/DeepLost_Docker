@@ -1,14 +1,8 @@
-version: '3.8'
-
+version: '3'
 services:
-  app:
-    build:
-      context: https://github.com/HAOYUAN521/DeepLost_Docker/tree/main
-      dockerfile: Dockerfile  
-    volumes:
-      - ./app:/app  
+  web:
+    build: .
     ports:
-      - "5000:5000"  
-    environment:
-      - PYTHONPATH=/app  
-    command: python /app/app.py 
+      - "5000:5000"
+  redis:
+    image: "redis:alpine"
