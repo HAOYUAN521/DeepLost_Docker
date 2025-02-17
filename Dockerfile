@@ -1,9 +1,17 @@
-FROM python:3.7-alpine
-WORKDIR /code
-ENV FLASK_APP app.py
-ENV FLASK_RUN_HOST 0.0.0.0
-RUN apk add --no-cache gcc musl-dev linux-headers
-COPY requirements.txt requirements.txt
+
+FROM python:3.8-slim
+
+
+RUN apt-get update && apt-get install -y git
+
+
+RUN git clone https://github.com/HAOYUAN521/DeepLost_Docker.git
+
+
+WORKDIR /DeepLost_Docker
+
+
 RUN pip install -r requirements.txt
-COPY . .
-CMD ["flask", "run"]
+
+
+CMD ["python", "app.py"]
