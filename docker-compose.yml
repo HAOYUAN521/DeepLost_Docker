@@ -5,12 +5,11 @@ services:
     working_dir: /app
     ports:
       - "5000:5000"
-    volumes:
-      - /app
     command: >
       sh -c "apt-get update && apt-get install -y git &&
              git clone https://github.com/HAOYUAN521/DeepLost_Docker.git /app &&
              pip install -r /app/requirements.txt &&
+             until nc -z redis 6379; do sleep 1; done &&
              python /app/app.py"
     depends_on:
       - redis
